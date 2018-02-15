@@ -4,12 +4,10 @@ class SearchForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:{
                 from: '',
                 to: '',
                 date: ''
-            }
-
+            
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -29,7 +27,7 @@ class SearchForm extends Component {
 
         //console.log('A form was submitted: ' + this.state.from + ' ' + this.state.to + ' ' + this.correctDateFormat(this.state.date));
         event.preventDefault();
-        this.props.onChangeForm(this.state.data)
+        this.props.changeForm(this.state.from, this.state.to, this.state.date);
     }
 
     render() {
@@ -38,15 +36,15 @@ class SearchForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         From:
-                        <input type="text" name="from" value={this.state.data.from} onChange={this.handleInputChange} />
+                        <input type="text" name="from" value={this.state.from} onChange={this.handleInputChange} />
                     </label>
                     <label>
                         To:
-                        <input type="text" name="to" value={this.state.data.to} onChange={this.handleInputChange} />
+                        <input type="text" name="to" value={this.state.to} onChange={this.handleInputChange} />
                     </label>
                     <label>
                         Date:
-                        <input type="date" name="date" value={this.state.data.date} onChange={this.handleInputChange} />
+                        <input type="date" name="date" value={this.state.date} onChange={this.handleInputChange} />
                     </label>
 
                     <input type="submit" value="Submit" />

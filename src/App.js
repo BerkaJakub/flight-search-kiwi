@@ -11,8 +11,9 @@ class App extends Component {
     };
   }
 
-  onChangeForm(data){
-    fetch(`https://api.skypicker.com/flights?flyFrom=`+data.from+`&to=`+data.to+`&dateFrom=`+data.date+`&dateTo=`+data.date+`&partner=picky&partner_market=us`)
+  onChangeForm(from, to, date){
+    console.log(from, to, date);
+    fetch(`https://api.skypicker.com/flights?flyFrom=`+from+`&to=`+to+`&dateFrom=`+date+`&dateTo=`+date+`&partner=picky&partner_market=us`)
     .then( function(response) {
       return response;
     })
