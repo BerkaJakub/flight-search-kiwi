@@ -4,57 +4,33 @@ import Flights from './components/Flights';
 import './App.css';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       flights: []
     };
   }
 
-  onChangeForm(from, to, date){
-    console.log(from, to, date);
-    fetch(`https://api.skypicker.com/flights?flyFrom=`+from+`&to=`+to+`&dateFrom=`+date+`&dateTo=`+date+`&partner=picky&partner_market=us`)
-    .then( function(response) {
-      return response;
-    })
-    .then( function(data) {
-      console.log(data);
-    })
-    .catch( function() {
-      this.setState({
-        infoStatus: 'error'
-      });
-    })
-
+  onChangeForm(from, to, date) {
+    var parts = date.split('-');
+    var correctDate = parts[2] + "/" + parts[1] + "/" + parts[0];
+    console.log(from, to, correctDate);
+    fetch(`https://api.skypicker.com/flights?flyFrom=` + from + `&to=` + to + `&dateFrom=` + correctDate + `&dateTo=` + correctDate + `&partner=picky&partner_market=us`)
+      .then(response => response.json())
+      .then(res => this.setState({ flights: res.data }))
+      .catch(function (error) {
+        console.log('There has been a problem with your fetch operation: ', error.message);
+      })
   }
 
 
   render() {
-    
-
-    let flights = [
-      {
-      key: '1',
-      from: "Praue",
-      to: "Barcelona",
-      date: "12/12/2018",
-      time: "12:30",
-      price: "58 EUR" },
-      {
-      key: '2',
-      from: "Prague",
-      to: "Brno",
-      date: "12/12/2018",
-      time: "12:30",
-      price: "48 EUR" }
-    
-    ];
 
     return (
       <div className="App">
         <h1>Flight Search</h1>
-        <SearchForm changeForm={this.onChangeForm.bind(this)}/>
-        <Flights flights={this.state.flights}/>
+        <SearchForm changeForm={this.onChangeForm.bind(this)} />
+        <Flights flights={this.state.flights} />
       </div>
     );
   }
