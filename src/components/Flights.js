@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlightItem from './FlightItem';
-
+import PropTypes from 'prop-types';
 
 class Flights extends Component {
 
@@ -49,5 +49,9 @@ class Flights extends Component {
         );
     }
 }
+
+Flights.propTypes = {
+    flights: PropTypes.object
+  };
 
 export default Flights;
