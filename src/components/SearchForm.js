@@ -20,8 +20,8 @@ class SearchForm extends Component {
 
     handleFromInputChange(event) {
         this.setState({ from: event.target.value });
-        fetch(`https://api.skypicker.com/locations/?term=`+event.target.value+`&locale=en-US&v=2&location_types=city`)
-            .then(response =>  response.json())
+        fetch(`https://api.skypicker.com/locations/?term=` + event.target.value + `&locale=en-US&v=2&location_types=city`)
+            .then(response => response.json())
             .then(
                 res => this.setState({ fromLocations: res.locations })
             )
@@ -32,7 +32,7 @@ class SearchForm extends Component {
 
     handleToInputChange(event) {
         this.setState({ to: event.target.value });
-        fetch(`https://api.skypicker.com/locations/?term=`+event.target.value+`&v=2&locale=en-US&location_types=city`)
+        fetch(`https://api.skypicker.com/locations/?term=` + event.target.value + `&v=2&locale=en-US&location_types=city`)
             .then(response => response.json())
             .then(
                 res => this.setState({ toLocations: res.locations })
@@ -53,24 +53,30 @@ class SearchForm extends Component {
 
     render() {
         return (
-            <div className="SearchForm">
+            <div className="SearchForm container mb-5">
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        From:
-                        <input type="text" name="from" value={this.state.from} onChange={this.handleFromInputChange} list="fromLocations" />
-                        <LocationsSuggestion id="fromLocations" locations={this.state.fromLocations} />
-                    </label>
-                    <label>
-                        To:
-                        <input type="text" name="to" value={this.state.to} onChange={this.handleToInputChange} list="toLocations" />
-                        <LocationsSuggestion id="toLocations" locations={this.state.toLocations} />
-                    </label>
-                    <label>
-                        Date:
-                        <input type="date" name="date" value={this.state.date} onChange={this.handleDateInputChange} />
-                    </label>
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label>From:</label>
+                            <input className="form-control" type="text" name="from" value={this.state.from} onChange={this.handleFromInputChange} list="fromLocations" placeholder="City"/>
+                            <LocationsSuggestion id="fromLocations" locations={this.state.fromLocations} />
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label>To:</label>
+                            <input className="form-control" type="text" name="to" value={this.state.to} onChange={this.handleToInputChange} list="toLocations" placeholder="City"/>
+                            <LocationsSuggestion id="toLocations" locations={this.state.toLocations} />
 
-                    <input type="submit" value="Submit" />
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group col-md-4">
+                            <label>Date:</label>
+                            <input className="form-control" type="date" name="date" value={this.state.date} onChange={this.handleDateInputChange} placeholder=""/>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <input type="submit" value="Search" className="btn btn-primary" />
+                    </div>
                 </form>
             </div>
         );

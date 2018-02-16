@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchForm from './components/SearchForm';
 import Flights from './components/Flights';
 import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
@@ -27,7 +28,7 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div className="App container">
         <h1>Flight Search</h1>
         <SearchForm changeForm={this.onChangeForm.bind(this)} />
         <Flights flights={this.state.flights} />
